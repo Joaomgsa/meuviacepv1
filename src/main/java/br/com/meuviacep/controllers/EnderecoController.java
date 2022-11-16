@@ -16,9 +16,21 @@ public class EnderecoController {
     @Autowired
     EnderecoService enderecoService;
 
+    /**
+     * @author Joao Marcos Santos
+     * Method that return printable json with cep as parameter
+     *
+     * HTTP Status
+     * 200 - Ok.
+     * 400 - Cep not Found
+     */
+
     @GetMapping(value = "/{cep}")
     public ResponseEntity<EnderecoEntity> findByCep(@PathVariable String cep){
         EnderecoEntity endereco = enderecoService.findCep(cep);
-        return ResponseEntity.ok().body(endereco);
+        if (endereco.getCep() == null) {
+            return ResponseEntity.notFound().build();
+        }
+            return ResponseEntity.ok().body(endereco);
     }
 }

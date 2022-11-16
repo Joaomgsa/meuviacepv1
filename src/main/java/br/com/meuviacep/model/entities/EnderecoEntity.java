@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class EnderecoEntity {
@@ -146,4 +147,16 @@ public class EnderecoEntity {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EnderecoEntity endereco = (EnderecoEntity) o;
+        return id == endereco.id && Objects.equals(enderecoId, endereco.enderecoId) && Objects.equals(cep, endereco.cep) && Objects.equals(logradouro, endereco.logradouro) && Objects.equals(complemento, endereco.complemento) && Objects.equals(bairro, endereco.bairro) && Objects.equals(localidade, endereco.localidade) && Objects.equals(uf, endereco.uf) && Objects.equals(ibge, endereco.ibge) && Objects.equals(gia, endereco.gia) && Objects.equals(ddd, endereco.ddd) && Objects.equals(siafi, endereco.siafi);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(enderecoId, id, cep, logradouro, complemento, bairro, localidade, uf, ibge, gia, ddd, siafi);
+    }
 }
